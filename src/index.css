@@ -1,0 +1,63 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  h1 {
+    font-size: clamp(2rem, 4vw, 5rem); /* Large heading */
+    font-weight: 700;
+  }
+
+  h2 {
+    font-size: clamp(1.5rem, 3vw, 3rem); /* Medium heading */
+    font-weight: 600;
+  }
+
+  h3 {
+    font-size: clamp(1.25rem, 1.5vw, 2.5rem); /* Small heading */
+    font-weight: 500;
+  }
+
+  h4 {
+    font-size: clamp(1rem, 1vw, 2rem); /* Extra small heading */
+    font-weight: 500;
+  }
+
+  h5 {
+    font-size: clamp(0.875rem, 0.875rem, 1.5rem); /* Tiny heading */
+    font-weight: 300;
+  }
+}
+
+@font-face {
+  font-family: "Aptos";
+  src: url("./assets/fonts/Aptos.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Aptos";
+  src: url("./assets/fonts/Aptos-SemiBold.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+}
+
+body {
+  font-family: "Aptos", sans-serif;
+}
+
+.thead {
+  font-size: 16px;
+  color: #000;
+}
+
+.thead p {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.thead svg {
+  color: gray;
+}
