@@ -5,8 +5,18 @@ import { HiOutlineAdjustmentsHorizontal } from "react-icons/hi2";
 import { CiCalendarDate } from "react-icons/ci";
 import TableData from "./TableData";
 import Modal from "./Modal";
+import { useDispatch, useSelector } from "react-redux";
+import { filterModel } from "../features/model/modelSlice";
 
 const ModelTable = () => {
+  const { query } = useSelector((state) => state.model);
+  const dispatch = useDispatch();
+
+  const handleSearch = (e) => {
+    const query = e.currentTarget.value;
+    dispatch(filterModel(query));
+  };
+
   return (
     <div className="bg-gray-50 px-6 py-4">
       <div className="bg-white w-full h-full shadow-md rounded-md p-4">
@@ -29,6 +39,8 @@ const ModelTable = () => {
               type="text"
               className="grow"
               placeholder="Search by Name, ID"
+              value={query}
+              onChange={handleSearch}
             />
           </div>
           <div className="bg-[#F9FAFB] rounded-lg px-3 py-3 flex items-center gap-1">

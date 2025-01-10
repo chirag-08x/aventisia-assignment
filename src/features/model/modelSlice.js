@@ -25,8 +25,21 @@ export const aiModelSlice = createSlice({
       const endIndex = startIndex + state.itemsPerPage;
       state.filteredModels = state.models.slice(startIndex, endIndex);
     },
-    filterModel: (state, action) => {},
-    deleteModel: (state, action) => {},
+    filterModel: (state, action) => {
+      const query = action.payload.toLowerCase();
+      state.query = query;
+
+      state.filteredModels = state.models.filter((model) => {
+        return (
+          model.name.toLowerCase().includes(query) ||
+          model.description?.toLowerCase().includes(query)
+        );
+      });
+
+      const startIndex = (state.page - 1) * state.itemsPerPage;
+      const endIndex = startIndex + state.itemsPerPage;
+      state.filteredModels = state.filteredModels.slice(startIndex, endIndex);
+    },
     setPage(state, action) {
       state.page = action.payload;
       const startIndex = (state.page - 1) * state.itemsPerPage;
@@ -46,11 +59,9 @@ export const aiModelSlice = createSlice({
         let valueA, valueB;
 
         if (sortBy === "createdOn" || sortBy === "lastTrained") {
-          // Compare dates without time
           valueA = moment(a[sortBy]).startOf("day").toDate();
           valueB = moment(b[sortBy]).startOf("day").toDate();
         } else {
-          // Default sorting for string fields
           valueA = a[sortBy]?.toString().toLowerCase() || "";
           valueB = b[sortBy]?.toString().toLowerCase() || "";
         }
@@ -60,7 +71,6 @@ export const aiModelSlice = createSlice({
         return 0;
       });
 
-      // Update filtered models for pagination
       const startIndex = (state.page - 1) * state.itemsPerPage;
       const endIndex = startIndex + state.itemsPerPage;
       state.filteredModels = state.models.slice(startIndex, endIndex);
@@ -68,6 +78,7 @@ export const aiModelSlice = createSlice({
   },
 });
 
-export const { addModel, setPage, sortModel } = aiModelSlice.actions;
+export const { addModel, setPage, sortModel, filterModel } =
+  aiModelSlice.actions;
 
 export default aiModelSlice.reducer;
