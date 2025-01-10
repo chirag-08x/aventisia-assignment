@@ -29,16 +29,16 @@ export const aiModelSlice = createSlice({
       const query = action.payload.toLowerCase();
       state.query = query;
 
-      state.filteredModels = state.models.filter((model) => {
+      const startIndex = (state.page - 1) * state.itemsPerPage;
+      const endIndex = startIndex + state.itemsPerPage;
+      const modelsToFilter = state.models.slice(startIndex, endIndex);
+
+      state.filteredModels = modelsToFilter.filter((model) => {
         return (
           model.name.toLowerCase().includes(query) ||
           model.description?.toLowerCase().includes(query)
         );
       });
-
-      const startIndex = (state.page - 1) * state.itemsPerPage;
-      const endIndex = startIndex + state.itemsPerPage;
-      state.filteredModels = state.filteredModels.slice(startIndex, endIndex);
     },
     setPage(state, action) {
       state.page = action.payload;

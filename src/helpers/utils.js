@@ -44,5 +44,5 @@ export const getRandomDate = (startDate, endDate) => {
   const randomTimestamp =
     Math.random() * (end.valueOf() - start.valueOf()) + start.valueOf();
 
-  return moment(randomTimestamp);
+  return moment(randomTimestamp).toISOString();
 };
