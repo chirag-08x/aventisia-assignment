@@ -55,7 +55,11 @@ export const aiModelSlice = createSlice({
       state.sortBy = sortBy;
       state.sortOrder = isAscending ? "desc" : "asc";
 
-      state.models.sort((a, b) => {
+      const startIndex = (state.page - 1) * state.itemsPerPage;
+      const endIndex = startIndex + state.itemsPerPage;
+      const modelsToSort = state.models.slice(startIndex, endIndex);
+
+      modelsToSort.sort((a, b) => {
         let valueA, valueB;
 
         if (sortBy === "createdOn" || sortBy === "lastTrained") {
@@ -70,10 +74,7 @@ export const aiModelSlice = createSlice({
         if (valueA > valueB) return isAscending ? 1 : -1;
         return 0;
       });
-
-      const startIndex = (state.page - 1) * state.itemsPerPage;
-      const endIndex = startIndex + state.itemsPerPage;
-      state.filteredModels = state.models.slice(startIndex, endIndex);
+      state.filteredModels = modelsToSort;
     },
   },
 });

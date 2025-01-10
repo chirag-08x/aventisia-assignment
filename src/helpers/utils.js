@@ -37,7 +37,7 @@ export const getPaginationRange = (currentPage, totalPages) => {
 
 import moment from "moment";
 
-export const getRandomDate = (startDate, endDate) => {
+export const getRandomDate = () => {
   const start = moment("2024-01-01");
   const end = moment("2024-12-31");
 
