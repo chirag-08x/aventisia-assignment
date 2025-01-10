@@ -1,7 +1,7 @@
 import React from "react";
 import Logo from "../assets/logo.png";
 import { IoIosArrowBack } from "react-icons/io";
-import { SidebarData } from "../helpers/utils";
+import { SidebarData } from "../helpers/data";
 
 const Sidebar = () => {
   return (
