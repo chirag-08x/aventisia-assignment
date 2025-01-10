@@ -34,3 +34,15 @@ export const getPaginationRange = (currentPage, totalPages) => {
 
   return pages;
 };
+
+import moment from "moment";
+
+export const getRandomDate = (startDate, endDate) => {
+  const start = moment("2024-01-01");
+  const end = moment("2024-12-31");
+
+  const randomTimestamp =
+    Math.random() * (end.valueOf() - start.valueOf()) + start.valueOf();
+
+  return moment(randomTimestamp);
+};

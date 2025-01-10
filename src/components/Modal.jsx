@@ -13,8 +13,6 @@ const Modal = () => {
   const dispatch = useDispatch();
   const dialogRef = useRef(null);
 
-  console.log("IV", modelValues);
-
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
@@ -42,7 +40,6 @@ const Modal = () => {
       lastTrained: "2025-01-10T12:34:56.789Z",
       status: "Active",
     };
-    console.log(finalValues);
     dispatch(addModel(finalValues));
     setModelValues({ name: "", type: "", desc: "", llm: "" });
     closeModal();

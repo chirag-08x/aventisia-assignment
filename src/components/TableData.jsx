@@ -1,11 +1,18 @@
 import { TbArrowsSort } from "react-icons/tb";
 import { HiDotsVertical } from "react-icons/hi";
 import moment from "moment";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Pagination from "./Pagination";
+import { sortModel } from "../features/model/modelSlice";
 
 const TableData = ({}) => {
-  const { filteredModels, models } = useSelector((state) => state.model);
+  const { filteredModels } = useSelector((state) => state.model);
+  const dispatch = useDispatch();
+
+  const handleSortTableColumn = (e) => {
+    const sortBy = e.currentTarget.name;
+    dispatch(sortModel({ sortBy }));
+  };
 
   return (
     <>
@@ -15,32 +22,50 @@ const TableData = ({}) => {
             <tr>
               <th className="thead">
                 <p>
-                  Model Name <TbArrowsSort />
+                  Model Name{" "}
+                  <button name="name" onClick={handleSortTableColumn}>
+                    <TbArrowsSort />
+                  </button>
                 </p>
               </th>
               <th className="thead">
                 <p>
-                  Model Type <TbArrowsSort />
+                  Model Type{" "}
+                  <button name="type" onClick={handleSortTableColumn}>
+                    <TbArrowsSort />
+                  </button>
                 </p>
               </th>
               <th className="thead">
                 <p>
-                  Description <TbArrowsSort />
+                  Description{" "}
+                  <button name="desc" onClick={handleSortTableColumn}>
+                    <TbArrowsSort />
+                  </button>
                 </p>
               </th>
               <th className="thead">
                 <p>
-                  Created On <TbArrowsSort />
+                  Created On{" "}
+                  <button name="createdOn" onClick={handleSortTableColumn}>
+                    <TbArrowsSort />
+                  </button>
                 </p>
               </th>
               <th className="thead">
                 <p>
-                  Last Trained On <TbArrowsSort />
+                  Last Trained On{" "}
+                  <button name="lastTrained" onClick={handleSortTableColumn}>
+                    <TbArrowsSort />
+                  </button>
                 </p>
               </th>
               <th className="thead">
                 <p>
-                  Status <TbArrowsSort />
+                  Status{" "}
+                  <button name="status" onClick={handleSortTableColumn}>
+                    <TbArrowsSort />
+                  </button>
                 </p>
               </th>
               <th className="thead">Action</th>
@@ -84,7 +109,7 @@ const TableData = ({}) => {
           </tbody>
         </table>
       </div>
-      {models.length === 0 ? (
+      {filteredModels.length === 0 ? (
         <p className="pt-3 text-center text-lg font-semibold">
           Nothing to display. Please add to model.
         </p>
