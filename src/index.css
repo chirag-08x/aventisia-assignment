@@ -61,3 +61,22 @@ body {
 .thead svg {
   color: gray;
 }
+
+.form-input-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-input-wrapper input,
+.form-input-wrapper select {
+  min-height: 2.7rem;
+  height: 2.7rem;
+}
+
+.form-input-wrapper label {
+  margin-bottom: 3px;
+}
+
+::placeholder {
+  font-size: 16px;
+}

@@ -15,7 +15,13 @@ export const aiModelSlice = createSlice({
   name: "aiModel",
   initialState,
   reducers: {
-    addModel: (state, action) => {},
+    addModel: (state, action) => {
+      const newModel = action.payload;
+      state.models = [newModel, ...state.models];
+      const startIndex = (state.page - 1) * state.itemsPerPage;
+      const endIndex = startIndex + state.itemsPerPage;
+      state.filteredModels = state.models.slice(startIndex, endIndex);
+    },
     filterModel: (state, action) => {},
     sortModel: (state, action) => {},
     deleteModel: (state, action) => {},
