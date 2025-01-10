@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import Pagination from "./Pagination";
 
 const TableData = ({}) => {
-  const { filteredModels } = useSelector((state) => state.model);
+  const { filteredModels, models } = useSelector((state) => state.model);
 
   return (
     <>
@@ -84,7 +84,13 @@ const TableData = ({}) => {
           </tbody>
         </table>
       </div>
-      <Pagination />
+      {models.length === 0 ? (
+        <p className="pt-3 text-center text-lg font-semibold">
+          Nothing to display. Please add to model.
+        </p>
+      ) : (
+        <Pagination />
+      )}
     </>
   );
 };

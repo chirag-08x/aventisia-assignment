@@ -10,7 +10,7 @@ const Pagination = () => {
   const totalPages = Math.ceil(models.length / itemsPerPage);
   const paginationRange = getPaginationRange(page, totalPages);
   const startItem = (page - 1) * itemsPerPage + 1;
-  const endItem = startItem + itemsPerPage;
+  const endItem = Math.min(startItem + itemsPerPage - 1, models.length);
   const dispatch = useDispatch();
 
   const handlePaginationClick = (page) => {
